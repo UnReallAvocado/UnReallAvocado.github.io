@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Portfolio" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet" />
+  <script src="https://kit.fontawesome.com/fa62c117c7.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="styles.css" />
+  <title>ReallAvo</title>
+  <style>
+    .projects__grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+    }
+
+    .project {
+      position: relative;
+      overflow: hidden;
+      border-radius: 8px;
+    }
+
+    .project img,
+    .project video {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      border-radius: inherit;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .project img:hover,
+    .project video:hover {
+      transform: scale(1.05);
+    }
+
+    .lightbox {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      z-index: 999;
+      text-align: center;
+    }
+
+    .lightbox img,
+    .lightbox video {
+      max-width: 80%;
+      max-height: 80%;
+      margin-top: 10%;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+      border-radius: 8px;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      color: #fff;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    @media screen and (max-width: 600px) {
+      .projects__grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body class="light" id="top">
+  <header class="header center">
+    <h3>
+      <a href="index.html" class="link">Av0</a>
+    </h3>
+
+    <nav class="nav center">
+      <ul class="nav__list center">
+        <li class="nav__list-item">
+            <a class="link link--nav" href="index.html">Home</a>
+          </li>
+        <li class="nav__list-item">
+          <a class="link link--nav" href="#projects">Projects</a>
+        </li>
+      </ul>
+
+      <button type="button" aria-label="toggle theme" class="btn btn--icon">
+        <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+      </button>
+
+      <button
+        type="button"
+        aria-label="toggle navigation"
+        class="btn btn--icon nav__hamburger"
+      >
+        <i aria-hidden="true" class="fas fa-bars"></i>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Projects -->
+    <section id="projects" class="section projects">
+      <h2 class="section__title">RBXPRO Discord Bot</h2>
+
+      <div class="projects__grid">
+        <div class="project">
+          <img
+            src="Untitled-design.gif"
+            alt="Project 1"
+            onclick="openModal(this.src)"
+          >
+        </div>
+        <div class="project">
+          <img 
+            src="sHeLglFBHp.gif"
+            alt="Project 2"
+            onclick="openModal(this.src)"
+          ></img>
+        </div>
+        <div class="project">
+          <img
+            src="35mAE2Yds4.gif"
+            alt="Project 3"
+            onclick="openModal(this.src)"
+          >
+        </div>
+        
+        <!-- Add more images and videos as needed -->
+      </div>
+
+      <!-- Lightbox Modal -->
+      <div id="myModal" class="lightbox">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+        <img id="modalImg" class="modal-content">
+        <video id="modalVideo" class="modal-content" controls></video>
+      </div>
+    </section>
+  </main>
+  <script src="./script.js"></script>
+  <script>
+    function openModal(src) {
+      var modal = document.getElementById('myModal');
+      var modalImg = document.getElementById('modalImg');
+      var modalVideo = document.getElementById('modalVideo');
+
+      // Check if src is for an image or video
+      if (src.endsWith('.mp4') || src.endsWith('.webm') || src.endsWith('.ogg')) {
+        modalImg.style.display = 'none';
+        modalVideo.style.display = 'block';
+        modalVideo.src = src;
+        modalVideo.play();
+      } else {
+        modalVideo.style.display = 'none';
+        modalImg.style.display = 'block';
+        modalImg.src = src;
+      }
+
+      modal.style.display = 'block';
+    }
+
+    function closeModal() {
+      var modal = document.getElementById('myModal');
+      var modalImg = document.getElementById('modalImg');
+      var modalVideo = document.getElementById('modalVideo');
+
+      modal.style.display = 'none';
+      modalImg.src = '';
+      modalVideo.src = '';
+      modalVideo.pause();
+    }
+  </script>
+</body>
+</html>
